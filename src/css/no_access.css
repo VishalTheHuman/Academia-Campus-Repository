@@ -1,0 +1,12 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #22092C;
+}
+
+#outerBody{
+    height: 600px;
+    background-color: #F05941;
+    margin: 50px;
+    border-radius: 30px;
+}
