@@ -1,0 +1,39 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #c73a2b;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  #outerBody {
+    height: 580px;
+    background-image: url("../../assets/plainBanner.png");
+    margin: 40px;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    position: relative;
+  }
+  
+  #innerBody {
+    font-family: 'DM Serif Display', serif;
+    height: 20vw;
+    width: 30vw;
+    text-align: center;
+    background-color: #c73a2b;
+    border-radius: 20px;
+    position: absolute; 
+    top: 40%; 
+    left: 50%; 
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    transform: translate(-50%, -50%);
+  }
+  #requestText{
+    padding-top: 80px;
+  }
+  

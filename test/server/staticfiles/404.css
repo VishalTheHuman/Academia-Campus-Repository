@@ -1,0 +1,36 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #c73a2b;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#outerBody{
+    height: 580px;
+    margin: 40px;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+}
+
+#cat{
+    padding: 10vw;
+    width: 20vw;
+}
+
+#goBackButton {
+    font-family: 'DM Serif Display', serif;
+    background-color: #c73a2b;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top:400px ;
+}
+
+#goBackButton.clicked {
+    color: #000000;
+}

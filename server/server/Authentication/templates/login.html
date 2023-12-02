@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-80">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width,initial-scale=1.0">
+    <title>Academia - Campus Repository</title>
+    {% block content %}
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.png' %}">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    {% endblock %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src='{% static "js/login.js" %}'></script>
+</head>
+<body>
+    <div id="outerBody">
+        <div id ="innerRightLogin">
+            <h1 id="logorsign">Login</h1>
+            <!--Login In-->
+            <form class="login" action="#">
+                <h3 id="labels">Email</h3>
+                <input type="email" placeholder="Enter your Email" required minlength="5">
+                <h3 id="labels">Password</h3>
+                <input type="password" placeholder="Enter your Password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least one number, one lowercase and one uppercase letter, and be at least 8 characters long.">
+                <h6 id="forgot-signup">Forgot Password? <a href="#">Click Here</a> </h6>
+                <input id="loginButton" type="submit" value="Login">
+                <h6 id="forgot-signup">Don't Have an Account ? <a href="#" onclick="toggleForm()">Register Here</a> </h6>
+            </form>
+            <!--Sign Up-->
+            <form class="signup" action="#" style="display: none;">
+                <h3 id="labels">Name</h3>
+                <input type="text" placeholder="Enter your Name">
+                
+                <h3 id="labels">Select One</h3> 
+                <div class="radio-container">
+                    <input type="radio" name="userType" id="studentRadio" onclick="showRollNumber()" value="Student"> Student
+                    <input type="radio" name="userType" id="teacherRadio" onclick="showTeacherId()" value="Teacher"> Teacher
+                </div>
+
+                <div id="rollNumberSection" style="display: none;">
+                    <h3 id="labels">Roll Number</h3>
+                    <input type="text" placeholder="Enter your Roll Number">
+                </div>
+
+                <div id="teacherIdSection" style="display: none;">
+                    <h3 id="labels">Teacher ID</h3>
+                    <input type="text" placeholder="Enter your Teacher ID">
+                </div>
+
+                <h3 id="labels">Email</h3>
+                <input type="email" placeholder="Enter your Email" required minlength="5">
+
+                <h3 id="labels">Password</h3>
+                <input type="password" placeholder="Enter your Password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least one number, one lowercase and one uppercase letter, and be at least 8 characters long.">
+
+                <input id="loginButton" type="submit" value="Sign Up">
+                <h6 id="forgot-signup">Already have an account? <a href="#" onclick="toggleForm()">Login Here</a> </h6>
+            </form>
+        </div>
+        {% load static %}
+        <div id ="innerLeftDetails" style="background-image: url('{% static "/assets/loginBanner.png" %}');">
+        </div>
+    </div>
+</body>
+</html>

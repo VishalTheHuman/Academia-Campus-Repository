@@ -1,0 +1,113 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    background-color: #c73a2b;
+    overflow: hidden;
+}
+
+#outerBody{
+    height: 580px;
+    background-color: #ff9c4f;
+    margin: 40px;
+    border-radius: 20px;
+    padding: 25px;
+}
+
+#innerRightLogin{
+    height: 200px;
+    width: 200px;
+    float: right;
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    width: 40vw;
+    height: 530px;
+}
+#innerRightLogin h1{
+    font-family: 'DM Serif Display', serif;
+    padding-top: 90px;
+    padding-left: 20px;
+}
+
+#innerRightLogin h6{
+    font-family: 'DM Serif Display', serif;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-bottom: 0px;
+}
+
+#innerLeftDetails{
+    height: 200px;
+    width: 200px;
+    float: left;
+    border-radius: 20px;
+    padding: 25px;
+    width: 40vw;
+    height: 530px;
+}
+
+#iconDetails{
+    display: block;
+    margin: 0 auto;
+    padding-top: 100px;
+    width: 180px;
+}
+
+#labels{
+    margin:0px 20px;
+}
+input{
+    margin:10px 20px;
+    padding: 5px;
+    width:35vw;
+    border-radius: 5px;
+    border-width: 1px;
+}
+#loginButton{
+    border-radius: 10px;
+    border:none;
+    font-family: 'DM Serif Display', serif;
+    background-color: #ff9c4f;
+    font-size: large;
+    color: #ffffff;
+    width: 36vw;
+}
+
+form input[type="email"]::placeholder {
+    font-family: 'DM Serif Display', serif;
+}
+
+form input[type="password"]::placeholder {
+    font-family: 'DM Serif Display', serif;
+}
+
+form input[type="text"]::placeholder {
+    font-family: 'DM Serif Display', serif;
+}
+
+#forgot-signup{
+    margin: 4px 0px;
+}
+
+form.signup {
+    display: none;
+}
+
+.radio-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+input[type="radio"]:checked {
+    background-color: #000;
+}
