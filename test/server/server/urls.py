@@ -16,10 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from login import views as login_views
+from django.conf.urls import handler404
+from not_found.views import not_found_404
+
+handler404 = not_found_404
+
 
 urlpatterns = [
+    path('',login_views.login,name='login'),
     path('admin/', admin.site.urls),
     path('',include('login.urls')),
     path('',include('no_access.urls')),
     path('',include('not_found.urls')),
+    path('login/',include('login.urls')),
 ]
