@@ -49,8 +49,6 @@
             <!--Sign Up-->
 
 
-
-
             <form class="signup" action="{% url 'signup' %}" style="display: none;" method="post">
                 {% csrf_token %}
                 {{ signup_form.as_p }}
