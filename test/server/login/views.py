@@ -55,9 +55,9 @@ def login_view(request):
             auth_login(request, user)
             
             if user_profile.user_type == 'Student':
-                return redirect('not_found')
+                return redirect('studenthome')
             elif user_profile.user_type == 'Teacher':
-                return redirect('no_access')
+                return redirect('teacherhome')
             else:
                 return redirect('not_found')
         else:

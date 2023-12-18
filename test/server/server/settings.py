@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'login',
     'no_access',
     'not_found',
+    'studenthome',
+    'teacherhome',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +64,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'django.contrib.auAth.context_processors.auth',
+                'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.contrib.auth.context_processors.auth',
             ],
@@ -129,3 +131,8 @@ STATICFILES_FINDERS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGIN_URL = 'login'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # Add this if it doesn't exist, adjust as needed

@@ -29,5 +29,8 @@ urlpatterns = [
     path('',include('login.urls')),
     path('',include('no_access.urls')),
     path('',include('not_found.urls')),
+    path('',include('studenthome.urls')),
+    path('',include('teacherhome.urls')),
     path('login/',include('login.urls')),
 ]
+
