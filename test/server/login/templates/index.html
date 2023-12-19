@@ -28,21 +28,39 @@
             <form class="login" action="{% url 'login_view' %}" method="post">
                 {% csrf_token %}
                 {{ login_form.as_p }}
-            
+                
                 <h3 id="labels">Email</h3>
-                <input type="email" placeholder="Enter your Email" required minlength="5" name="username">
-            
+                <input type="email" placeholder="Enter your Email" required minlength="5" name="username" id="loginEmail">
+                
                 <h3 id="labels">Password</h3>
                 <input type="password" placeholder="Enter your Password" required minlength="8"
                        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                        title="Password must contain at least one number, one lowercase and one uppercase letter, and be at least 8 characters long." name="password">
             
-                <h6 id="forgot-signup">Forgot Password? <a href="#">Click Here</a></h6>
-            
+                <h6 id="forgot-signup" style="text-decoration: none;">Forgot Password? <a href="#" onclick="forgotPassword()">Click Here</a></h6>
+                
                 <input id="loginButton" type="submit" value="Login">
+                
+                <h6 id="forgot-signup" style="text-decoration: none;">Don't Have an Account? <a href="#" onclick="toggleForm(); return false;">Register Here</a></h6>
+            </form>
             
-                <h6 id="forgot-signup">Don't Have an Account? <a href="#" onclick="toggleForm(); return false;">Register Here</a></h6>
-            </form>            
+            <script>
+                // JavaScript function to redirect to forgot_password with the email in the URL
+                function forgotPassword() {
+                    var loginEmail = document.getElementById('loginEmail').value;
+                    window.location.href = "{% url 'forgot_password' %}?email=" + loginEmail;
+                }
+            </script>
+            
+            
+            <script>
+                // JavaScript function to store the email in the hidden input field
+                function storeEmail() {
+                    var loginEmail = document.getElementById('loginEmail').value;
+                    document.getElementById('hiddenLoginEmail').value = loginEmail;
+                }
+            </script>
+            
 
 
             <!--This is the start of Sign Up-->

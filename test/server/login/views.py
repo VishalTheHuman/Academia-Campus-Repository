@@ -62,3 +62,63 @@ def login_view(request):
             return redirect('no_access')
 
     return render(request, 'index.html')
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from .models import UserProfile
+from urllib.parse import unquote
+def forgot_password(request):
+    login_email = request.GET.get('email', '')
+    print("Login Email:", login_email)
+
+    # Optional: Convert to lowercase and strip whitespace for consistency
+    email = login_email.lower().strip()
+
+    try:
+        user_profile = UserProfile.objects.get(email=email)
+        print("User Profile Found:", user_profile)
+    except UserProfile.DoesNotExist:
+        print("No User Profile Found")
+        return render(request, 'index.html', {'error_message': 'No account found with this email address'})
+
+    user = User.objects.get(username=email)
+    password = user.password
+    forgotPasswordMail(email, password)
+    
+    print("Mail Sent")
+    return render(request, 'index.html')
+
+def forgotPasswordMail(to_email,password):
+    MAIL_ID = "academia.campus.repository@gmail.com"
+    PASSWORD = "obdq aojy inuq sbmu"
+    smtp_server = 'smtp.gmail.com'
+    smtp_port = 587 
+    subject = "Password Recovery - Academia Campus Repository"
+    msg = MIMEMultipart()
+    msg['From'] = MAIL_ID
+    msg['To'] = to_email
+    msg['Subject'] = subject
+    
+    content = """
+                <p>Your Password is : <b> PASSWORD </b></p>
+                <br>
+                <p><b>With Regards,</b></p>
+                <br>
+                <img src="cid:image1" alt="Image" style="width: 250px;">
+                """.replace("PASSWORD",password)
+    msg.attach(MIMEText(content, 'html'))
+    
+    with open("D:\\Code\\Projects Individual Repository\\Academia-Campus-Repository\\test\\server\\login\\textLogo.png", 'rb') as image_file:
+        img = MIMEImage(image_file.read(), name='image.png')
+        img.add_header('Content-ID', '<image1>')
+        msg.attach(img)
+    
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()
+        server.login(MAIL_ID, PASSWORD)
+        server.sendmail(MAIL_ID, to_email, msg.as_string())
