@@ -44,6 +44,8 @@ from login.models import UserProfile
 def upload_form(request):
     try:
         profile = UserProfile.objects.get(email=request.user.email)
+        name = profile.name
+        email = profile.email
     except UserProfile.DoesNotExist:
         profile = None
         print('UserProfile not found for user:', request.user.email)
@@ -58,7 +60,12 @@ def upload_form(request):
         if form.is_valid():
             file_instance = form.save(commit=False)
             file_instance.owner = request.user
+            file_name = file_instance.file.name
+            permission_status = file_instance.permission
             file_instance.save()
+            if file_name and permission_status and name:
+                notification(file_name,name,email)
+                          
 
     else:
         form = FileModelForm()
@@ -125,3 +132,67 @@ def get_teacher_name_and_id(uploaded_by):
         return teacher_profile.name, teacher_profile.teacher_id
     except UserProfile.DoesNotExist:
         return None, None
+
+
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from login.models import UserProfile
+from urllib.parse import unquote
+
+def notification(file_name,name,email):
+    MAIL_ID = "academia.campus.repository@gmail.com"
+    PASSWORD = "obdq aojy inuq sbmu"
+    smtp_server = 'smtp.gmail.com'
+    smtp_port = 587 
+    subject = f"'{file_name}' was added by '{name}'- Academia Campus Repository"
+    msg = MIMEMultipart()
+    students = getStudents()
+    try:
+        msg['From'] = MAIL_ID
+        msg['To'] = email
+        msg['Subject'] = subject
+        if students:
+            msg['Bcc'] = ', '.join(students)
+        content = """
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Email Subject</title>
+                    </head>
+                    <body>
+                        <p>Dear NAME,</p>
+                        <p>A File named 'FILE' has been uploaded by 'TEACHER'</p>
+                        <br>
+                        <p><b>With Regards,</b></p>
+                        <br>
+                        <img src="cid:image1" alt="Image" style="width: 250px;">
+                    </body>
+                    </html>
+                    """.replace("FILE",file_name).replace("TEACHER",name)
+        msg.attach(MIMEText(content, 'html'))
+        print(msg)
+        
+        with open("D:\\Code\\Projects Individual Repository\\Academia-Campus-Repository\\test\\server\\login\\textLogo.png", 'rb') as image_file:
+            img = MIMEImage(image_file.read(), name='image.png')
+            img.add_header('Content-ID', '<image1>')
+            msg.attach(img)
+        
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(MAIL_ID, PASSWORD)
+            server.sendmail(MAIL_ID, students[0], msg.as_string())
+    except Exception as e:
+        print(e)
+
+from login.models import UserProfile
+
+def getStudents():
+    students_emails = UserProfile.objects.filter(user_type='Student').values_list('email', flat=True)
+    return students_emails

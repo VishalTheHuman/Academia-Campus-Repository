@@ -19,6 +19,7 @@ def signup_view(request):
         teacher_id = request.POST.get('teacher_id', '')
         email = request.POST.get('email')
         password = request.POST.get('password')
+        forgot = request.POST.get('password')
 
         user = User.objects.create_user(username=email, email=email, password=password)
         user.first_name = name
@@ -30,7 +31,8 @@ def signup_view(request):
             roll_number=roll_number,
             teacher_id=teacher_id,
             email=email,
-            password=password 
+            password=password,
+            forgot= forgot
         )
 
         print(f"Email: {email}; Password: {password}; Name: {name}; Roll Number: {roll_number}; Teacher ID: {teacher_id}")
@@ -73,27 +75,22 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 from urllib.parse import unquote
 def forgot_password(request):
-    login_email = request.GET.get('email', '')
+    login_email = request.GET.get('email')
     print("Login Email:", login_email)
-
-    # Optional: Convert to lowercase and strip whitespace for consistency
-    email = login_email.lower().strip()
-
+    email = login_email
     try:
         user_profile = UserProfile.objects.get(email=email)
-        print("User Profile Found:", user_profile)
     except UserProfile.DoesNotExist:
-        print("No User Profile Found")
+        print("No User")
         return render(request, 'index.html', {'error_message': 'No account found with this email address'})
-
-    user = User.objects.get(username=email)
-    password = user.password
-    forgotPasswordMail(email, password)
+    forgot_value = user_profile.forgot
+    name = user_profile.name
     
+    forgotPasswordMail(email, forgot_value,name)
     print("Mail Sent")
     return render(request, 'index.html')
 
-def forgotPasswordMail(to_email,password):
+def forgotPasswordMail(to_email,password,name = "User"):
     MAIL_ID = "academia.campus.repository@gmail.com"
     PASSWORD = "obdq aojy inuq sbmu"
     smtp_server = 'smtp.gmail.com'
@@ -105,12 +102,13 @@ def forgotPasswordMail(to_email,password):
     msg['Subject'] = subject
     
     content = """
+                <p>Dear NAME,</p>
                 <p>Your Password is : <b> PASSWORD </b></p>
                 <br>
                 <p><b>With Regards,</b></p>
                 <br>
                 <img src="cid:image1" alt="Image" style="width: 250px;">
-                """.replace("PASSWORD",password)
+                """.replace("PASSWORD",password).replace("NAME",name)
     msg.attach(MIMEText(content, 'html'))
     
     with open("D:\\Code\\Projects Individual Repository\\Academia-Campus-Repository\\test\\server\\login\\textLogo.png", 'rb') as image_file:
