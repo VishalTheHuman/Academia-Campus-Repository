@@ -34,16 +34,15 @@ def signup_view(request):
         )
 
         print(f"Email: {email}; Password: {password}; Name: {name}; Roll Number: {roll_number}; Teacher ID: {teacher_id}")
-        return redirect('not_found')
+        return redirect('login')
 
-    return render(request, 'index.html')
+    return render(request, 'not_access.html')
 
 @csrf_exempt
 def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
         try:
             user_profile = UserProfile.objects.get(email=username)
         except UserProfile.DoesNotExist:
@@ -53,7 +52,6 @@ def login_view(request):
 
         if user_profile is not None and user is not None:
             auth_login(request, user)
-            
             if user_profile.user_type == 'Student':
                 return redirect('studenthome')
             elif user_profile.user_type == 'Teacher':
