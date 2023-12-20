@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-80">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width-device-width,initial-scale=1.0">
+    <title>Academia - Campus Repository</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.png' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'index.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    {% load static %}
+    <script src="{% static 'index.js' %}"></script>
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            background-color: #c73a2b;
+            overflow: hidden;
+        }
+
+        #outerBody{
+            height: 580px;
+            background-color: #ff9c4f;
+            margin: 40px;
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+        #innerRightLogin{
+            height: 200px;
+            width: 200px;
+            float: right;
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            width: 40vw;
+            height: 530px;
+        }
+        #innerRightLogin h1{
+            font-family: 'DM Serif Display', serif;
+            padding-top: 90px;
+            padding-left: 20px;
+        }
+
+        #innerRightLogin h6{
+            font-family: 'DM Serif Display', serif;
+            padding-top: 0px;
+            padding-left: 20px;
+            padding-bottom: 0px;
+        }
+
+        #innerLeftDetails{
+            height: 200px;
+            width: 200px;
+            float: left;
+            border-radius: 20px;
+            padding: 25px;
+            width: 40vw;
+            height: 530px;
+        }
+
+        #iconDetails{
+            display: block;
+            margin: 0 auto;
+            padding-top: 100px;
+            width: 180px;
+        }
+
+        #labels{
+            margin:0px 20px;
+        }
+        input{
+            margin:10px 20px;
+            padding: 5px;
+            width:35vw;
+            border-radius: 5px;
+            border-width: 1px;
+        }
+        #loginButton{
+            border-radius: 10px;
+            border:none;
+            font-family: 'DM Serif Display', serif;
+            background-color: #ff9c4f;
+            font-size: large;
+            color: #ffffff;
+            width: 36vw;
+        }
+
+        form input[type="email"]::placeholder {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        form input[type="password"]::placeholder {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        form input[type="text"]::placeholder {
+            font-family: 'DM Serif Display', serif;
+        }
+
+        #forgot-signup{
+            margin: 4px 0px;
+        }
+
+        form.signup {
+            display: none;
+        }
+
+        .radio-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-right: 10px;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #000;
+        }
+    </style>
+    <script>
+        function toggleForm() {
+            var loginForm = document.querySelector('.login');
+            var signupForm = document.querySelector('.signup');
+            var header = document.querySelector("#logorsign");
+
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                signupForm.style.display = 'none';
+                header.innerText = "Login"; 
+                header.style.paddingTop = "90px";
+            } else {
+                loginForm.style.display = 'none';
+                signupForm.style.display = 'block';
+                header.innerText = "Sign Up"; 
+                header.style.paddingTop = "50px";
+                document.getElementById("teacherIdSection").style.display = "none";
+                document.getElementById("rollNumberSection").style.display = "none";
+            }
+        }
+
+        function showRollNumber() {
+            var header = document.querySelector("#logorsign");
+            document.getElementById("rollNumberSection").style.display = "block";
+            document.getElementById("teacherIdSection").style.display = "none";
+            header.style.paddingTop = "0px";
+            header.style.marginTop ="20px";
+        }
+
+        function showTeacherId() {
+            var header = document.querySelector("#logorsign");
+            document.getElementById("teacherIdSection").style.display = "block";
+            document.getElementById("rollNumberSection").style.display = "none";
+            header.style.paddingTop = "0px";
+            header.style.marginTop ="20px";
+        }
+
+
+    </script>
+</head>
+<body>
+    <div id="outerBody">
+        <div id ="innerRightLogin">
+            <h1 id="logorsign">Login</h1>
+
+
+            <!--This is the start of Login-->
+            <!--Login-->            
+            
+            
+            <form class="login" action="{% url 'login_view' %}" method="post">
+                {% csrf_token %}
+                {{ login_form.as_p }}
+                
+                <h3 id="labels">Email</h3>
+                <input type="email" placeholder="Enter your Email" required minlength="5" name="username" id="loginEmail">
+                
+                <h3 id="labels">Password</h3>
+                <input type="password" placeholder="Enter your Password" required minlength="8"
+                       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                       title="Password must contain at least one number, one lowercase and one uppercase letter, and be at least 8 characters long." name="password">
+            
+                <h6 id="forgot-signup" style="text-decoration: none;">Forgot Password? <a href="#" onclick="forgotPassword()">Click Here</a></h6>
+                
+                <input id="loginButton" type="submit" value="Login">
+                
+                <h6 id="forgot-signup" style="text-decoration: none;">Don't Have an Account? <a href="#" onclick="toggleForm(); return false;">Register Here</a></h6>
+            </form>
+            
+            <script>
+                // JavaScript function to redirect to forgot_password with the email in the URL
+                function forgotPassword() {
+                    var loginEmail = document.getElementById('loginEmail').value;
+                    window.location.href = "{% url 'forgot_password' %}?email=" + loginEmail;
+                }
+            </script>
+            
+            
+            <script>
+                // JavaScript function to store the email in the hidden input field
+                function storeEmail() {
+                    var loginEmail = document.getElementById('loginEmail').value;
+                    document.getElementById('hiddenLoginEmail').value = loginEmail;
+                }
+            </script>
+            
+
+
+            <!--This is the start of Sign Up-->
+            <!--Sign Up-->
+
+
+            <form class="signup" action="{% url 'signup' %}" style="display: none;" method="post">
+                {% csrf_token %}
+                {{ signup_form.as_p }}
+                <h3 id="labels">Name</h3>
+                <input type="text" placeholder="Enter your Name" name="name">
+                
+                <h3 id="labels">Select One</h3> 
+                <div class="radio-container">
+                    <input type="radio" name="userType" id="studentRadio" onclick="showRollNumber()" value="Student"> Student
+                    <input type="radio" name="userType" id="teacherRadio" onclick="showTeacherId()" value="Teacher"> Teacher
+                </div>
+
+                <div id="rollNumberSection" style="display: none;">
+                    <h3 id="labels">Roll Number</h3>
+                    <input type="text" placeholder="Enter your Roll Number" name="roll_number">
+                </div>
+
+                <div id="teacherIdSection" style="display: none;">
+                    <h3 id="labels">Teacher ID</h3>
+                    <input type="text" placeholder="Enter your Teacher ID" name="teacher_id">
+                </div>
+
+                <h3 id="labels">Email</h3>
+                <input type="email" placeholder="Enter your Email" required minlength="5" name="email">
+
+                <h3 id="labels">Password</h3>
+                <input type="password" placeholder="Enter your Password" required minlength="8" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Password must contain at least one number, one lowercase and one uppercase letter, and be at least 8 characters long." name="password">
+
+                <input id="loginButton" type="submit" value="Sign Up">
+                <h6 id="forgot-signup">Already have an account? <a href="#" onclick="toggleForm();return false">Login Here</a> </h6>
+            </form>
+        </div>
+        {% load static %}
+        <div id ="innerLeftDetails" style="background-image: url('{% static 'loginBanner.png' %}');">
+        </div>
+    </div>
+</body>
+</html>

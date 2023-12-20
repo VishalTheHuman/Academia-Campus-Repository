@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Academia</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'logo.png' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'studenthome.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body{
+            margin: 0px;
+            padding: 0px;
+            background-color: #c73a2b;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #outerBody {
+            height: 580px;
+            background-color: #ff9c4f;
+            margin: 40px;
+            border-radius: 20px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        #dummy{
+            height: 120px;
+        }
+        #innerBody{
+            height: 460px;
+            background-color: #ffffff;
+            border-radius: 20px;
+        }
+
+        #cat{
+            padding: 10vw;
+            width: 20vw;
+        }
+
+        #hello {
+            float: left;
+            font-family: 'DM Serif Display', serif;
+            color: #383737;
+            font-size: 50px;
+            margin: 20px;
+        }
+
+
+        #goBackButton {
+            font-family: 'DM Serif Display', serif;
+            background-color: #c73a2b;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top:400px ;
+        }
+
+        #goBackButton.clicked {
+            color: #000000;
+        }
+        .table-container {
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-spacing: 10px;
+    }
+
+    th, td {
+        padding: 10px;
+        border-radius: 15px;
+        font-size: large;
+    }
+
+    thead {
+        background-color: #ff9c4f;
+        color: #383737;
+    }
+
+    .download-button {
+        font-family: 'DM Serif Display', serif;
+        background-color: #c73a2b;
+        color: #ffffff;
+        border-radius: 20px;
+        font-weight: bold;
+        padding: 3px 20px;
+    }
+    </style>
+</head>
+<body>
+    <div id="outerBody">
+        <div id="dummy">
+            <h1 id="hello">
+                {% with profile.name as username %}
+                    Hi {% if request.user.is_authenticated %} {{ username }} {% else %} Not Found {% endif %} !
+                {% endwith %}
+                {% if profile.roll_number %}
+                    <h4 style="float: left;margin-top:55px;font-family: 'DM Serif Display', serif; color: #383737;">
+                        Roll Number: <h4 style="float: left;margin-top:55px;font-family: 'DM Serif Display', serif; color: #fffafa;padding-left:5px">{{ profile.roll_number }}</h4>
+                    </h4>
+                {% endif %}
+            </h1>  
+            <form style="padding-top: 55px;padding-left:100px;float: left;" method="get" action="">
+                <label style="font-family: 'DM Serif Display', serif;" for="search">Search:</label>
+                <input type="text" style="font-family: 'DM Serif Display', serif; border-radius: 10px;" name="search">
+                <button style="font-family: 'DM Serif Display', serif; background-color: #c73a2b; color: #ffffff; border-radius: 10px; padding: 3px;" type="submit">Search</button>
+            </form>          
+            {% load static %}
+            <img src="{% static 'textLogo.png' %}" alt="Text Logo" width="250px" style="float: right;padding-top: 9px;">
+        </div>
+        <div class="table-container" id="innerBody">
+            <table style="width: 100%; border-spacing: 10px;">
+                <thead style="background-color: #ff9c4f; color: #383737;">
+                    <tr>
+                        <th style="padding: 10px;border-radius: 15px;font-size: large;">File Name</th>
+                        <th  style="padding: 10px;border-radius: 15px;font-size: large;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for file_data in files_data %}
+                        <tr>
+                            {% load student_custom_filters %}
+                            <td style="float: left;padding-left: 20px;">{{ file_data.file.name|get_file_name }}</td>
+                            <td>
+                                <form action="{% url 'download_file' file_data.id %}" method="get">
+                                    <button type="submit" class="download-button" style="font-family: 'DM Serif Display', serif;background-color:#c73a2b;color:#ffffff;border-radius: 20px;font-weight: bold; padding: 3px 20px;">Download</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
