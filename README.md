@@ -128,7 +128,7 @@ To set up and run Academia locally, follow the instructions in the [Project Setu
 
 ## ```Contributing```
 
-Contributions are welcome! Please refer to the [Contribution Guidelines](CONTRIBUTING.md) for details on how to contribute to this project. 🤝
+Contributions are welcome! 🤝
 
 ## ```License```
 
