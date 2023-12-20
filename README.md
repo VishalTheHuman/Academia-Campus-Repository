@@ -1,5 +1,6 @@
 # ```Academia - Campus Repository : Django 📔```
-## ```Features```
+
+## ```Description```
 Academia is a Django-based Campus Repository designed to streamline the file-sharing process between teachers and students. The platform offers distinct homepages for both teachers and students, each tailored to their specific needs. Teachers can efficiently manage files, set permissions, and maintain control over their uploads. On the other hand, students gain easy access to educational resources and a seamless file search experience.
 
 ## ```Features```
