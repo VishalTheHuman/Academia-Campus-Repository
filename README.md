@@ -47,9 +47,6 @@ Academia is a Django-based Campus Repository designed to streamline the file-sha
 - **HTML/CSS/JavaScript:**
   The frontend is designed using a combination of HTML, CSS, and JavaScript to create a user-friendly and responsive interface. 🌐
 
-- **Bootstrap:**
-  Bootstrap is employed for styling and layout, ensuring a modern and consistent design across the application. 🎨
-
 ## ```Setup```
 
 Step-by-step instructions to set up and run the project.
