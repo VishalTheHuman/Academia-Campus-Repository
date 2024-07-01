@@ -1,6 +1,6 @@
 # ```Academia - Campus Repository : Django 📔```
 
-![banner](https://github.com/VishalTheHuman/Academia-Campus-Repository/assets/117697246/8409bf50-237c-4443-8eea-8af91d429926)
+![banner](assets/banner.png)
 
 ## ```Description```
 
@@ -123,14 +123,13 @@ Step-by-step instructions to set up and run the project.
 
 ## ```User Interface (UI) and Email Client```
 
-![login](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/e1cc19d3-e89e-4199-92d4-2e236e36e16c)
-![signup](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/746d7a3e-35e8-4422-816e-e49934d7da30)
-![no access](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/98723d3b-ea57-4c1b-bda8-1da757a9807d)
-![404](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/03f8e163-e4e6-4141-991b-3170f28f778e)
-![student home](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/b7705911-6fb7-45ac-abb7-df98e351f54a)
-![teacher home](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/8d3741dd-fef0-4536-aa51-2ab719f0676c)
-![file notification](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/b620667f-1ddf-406a-aaa5-aa54dbb99a4f)
-![forgot password](https://github.com/VishalTheHuman/Tic-Tac-Toe-Using-Tkinter/assets/117697246/a9012cdb-f348-4c12-aa69-79dd9e2c33eb)
+![login](assets/login.png)
+![signup](assets/signup.png)
+![no access](assets/no%20access.png)
+![404](assets/404.png)
+![student home](assets/student%20home.png)
+![teacher home](assets/teacher%20home.png)
+![file notification](assets/file%20notification.png)
 
 ## ```Getting Started```
 
